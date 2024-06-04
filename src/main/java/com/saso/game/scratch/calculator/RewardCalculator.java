@@ -1,4 +1,4 @@
-package com.saso.game.scratch;
+package com.saso.game.scratch.calculator;
 
 import java.util.List;
 import java.util.Map;

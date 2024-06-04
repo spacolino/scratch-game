@@ -1,4 +1,4 @@
-package com.saso.game.scratch;
+package com.saso.game.scratch.calculator;
 
 import java.util.List;
 import java.util.Map;
@@ -6,10 +6,10 @@ import java.util.Map;
 import com.saso.game.scratch.config.GameConfig;
 import com.saso.game.scratch.config.SymbolConfig;
 
-public class BonusApplier {
+public class BonusCalculator {
     private final GameConfig config;
 
-    public BonusApplier(GameConfig config) {
+    public BonusCalculator(GameConfig config) {
         this.config = config;
     }
 

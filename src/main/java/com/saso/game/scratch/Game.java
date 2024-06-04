@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.saso.game.scratch.calculator.BonusCalculator;
+import com.saso.game.scratch.calculator.RewardCalculator;
 import com.saso.game.scratch.config.GameConfig;
 
 public class Game {
@@ -35,7 +35,7 @@ public class Game {
             RewardCalculator rewardCalculator = new RewardCalculator(config);
             double reward = rewardCalculator.calculateReward(betAmount, winningCombinations);
 
-            BonusApplier bonusApplier = new BonusApplier(config);
+            BonusCalculator bonusApplier = new BonusCalculator(config);
             reward = bonusApplier.applyBonusSymbols(matrix, reward, winningCombinations);
 
             String appliedBonusSymbol = getAppliedBonusSymbol(matrix, config);
