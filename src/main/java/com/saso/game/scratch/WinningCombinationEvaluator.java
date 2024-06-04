@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.inject.Inject;
 import com.saso.game.scratch.config.GameConfig;
 import com.saso.game.scratch.config.WinCombinationConfig;
 
 public class WinningCombinationEvaluator {
     private final GameConfig config;
 
-    @Inject
     public WinningCombinationEvaluator(GameConfig config) {
         this.config = config;
     }

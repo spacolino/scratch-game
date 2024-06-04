@@ -3,7 +3,6 @@ package com.saso.game.scratch;
 import java.util.Map;
 import java.util.Random;
 
-import com.google.inject.Inject;
 import com.saso.game.scratch.config.GameConfig;
 import com.saso.game.scratch.config.StandardSymbolProbability;
 
@@ -11,7 +10,6 @@ public class MatrixBuilder {
 	    private final GameConfig config;
 	    private final Random random;
 
-	    @Inject
 	    public MatrixBuilder(GameConfig config) {
 	        this.config = config;
 	        this.random = new Random();

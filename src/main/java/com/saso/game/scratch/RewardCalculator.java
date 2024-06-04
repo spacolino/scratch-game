@@ -3,13 +3,11 @@ package com.saso.game.scratch;
 import java.util.List;
 import java.util.Map;
 
-import com.google.inject.Inject;
 import com.saso.game.scratch.config.GameConfig;
 
 public class RewardCalculator {
     private final GameConfig config;
 
-    @Inject
     public RewardCalculator(GameConfig config) {
         this.config = config;
     }
