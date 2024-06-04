@@ -7,5 +7,5 @@ public record Result(
 	String[][] matrix,
     double reward,
     Map<String, List<String>> appliedWinningCombinations,
-    String appliedBonusSymbo
+    String appliedBonusSymbol
 ) {}
