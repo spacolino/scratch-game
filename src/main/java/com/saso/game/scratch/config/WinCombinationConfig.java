@@ -16,5 +16,5 @@ public record WinCombinationConfig(
         String group,
         
         @JsonProperty("covered_areas")
-        List<List<String>> covered_areas
+        List<List<String>> coveredAreas
 ) {}
