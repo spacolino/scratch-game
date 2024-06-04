@@ -1,6 +1,11 @@
 package com.saso.game.scratch.config;
 
-public class GameConfig {
-	public int columns;
-    public int rows;
-}
+import java.util.Map;
+
+public record GameConfig(
+	int columns,
+	int rows,
+	Map<String, SymbolConfig> symbols,
+    ProbabilitiesConfig probabilities,
+    Map<String, WinCombinationConfig> win_combinations
+) {}
