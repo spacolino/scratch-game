@@ -35,8 +35,8 @@ public class Game {
             RewardCalculator rewardCalculator = new RewardCalculator(config);
             double reward = rewardCalculator.calculateReward(betAmount, winningCombinations);
 
-            BonusCalculator bonusApplier = new BonusCalculator(config);
-            reward = bonusApplier.applyBonusSymbols(matrix, reward, winningCombinations);
+            BonusCalculator bonusCalculator = new BonusCalculator(config);
+            reward = bonusCalculator.applyBonusSymbols(matrix, reward, winningCombinations);
 
             String appliedBonusSymbol = getAppliedBonusSymbol(matrix, config);
 

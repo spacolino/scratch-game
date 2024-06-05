@@ -16,29 +16,39 @@ public class MatrixBuilder {
 	    }
 
 	    public String[][] generateMatrix() {
-	        String[][] matrix = new String[config.rows()][config.columns()];
+	    	String[][] matrix = new String[config.rows()][config.columns()];
 
-	        // Fill matrix with standard symbols based on probabilities
-	        for (StandardSymbolProbability prob : config.probabilities().standardSymbols()) {
-	            int totalProbability = prob.symbols().values().stream().mapToInt(Integer::intValue).sum();
-	            int randomValue = random.nextInt(totalProbability) + 1;
-	            int cumulativeProbability = 0;
-	            for (Map.Entry<String, Integer> entry : prob.symbols().entrySet()) {
-	                cumulativeProbability += entry.getValue();
-	                if (randomValue <= cumulativeProbability) {
-	                    matrix[prob.row()][prob.column()] = entry.getKey();
-	                    break;
-	                }
-	            }
-	        }
+	        // Calculate total probability for standard symbols
+	        int totalStandardProbability = config.probabilities().standardSymbols().stream()
+	                .flatMap(prob -> prob.symbols().values().stream())
+	                .mapToInt(Integer::intValue).sum();
 
-	        // Randomly place bonus symbols in the matrix
+	        // Calculate total probability for bonus symbols
+	        int totalBonusProbability = config.probabilities().bonusSymbols().symbols().values().stream()
+	                .mapToInt(Integer::intValue).sum();
+
+	        // Fill matrix with symbols based on probabilities
 	        for (int i = 0; i < config.rows(); i++) {
 	            for (int j = 0; j < config.columns(); j++) {
-	                if (matrix[i][j] == null) {
-	                    int totalProbability = config.probabilities().bonusSymbols().symbols().values().stream().mapToInt(Integer::intValue).sum();
-	                    int randomValue = random.nextInt(totalProbability) + 1;
-	                    int cumulativeProbability = 0;
+	                int randomValue = random.nextInt(totalStandardProbability + totalBonusProbability) + 1;
+	                int cumulativeProbability = 0;
+
+	                // Check standard symbols
+	                boolean placed = false;
+	                for (StandardSymbolProbability prob : config.probabilities().standardSymbols()) {
+	                    for (Map.Entry<String, Integer> entry : prob.symbols().entrySet()) {
+	                        cumulativeProbability += entry.getValue();
+	                        if (randomValue <= cumulativeProbability) {
+	                            matrix[i][j] = entry.getKey();
+	                            placed = true;
+	                            break;
+	                        }
+	                    }
+	                    if (placed) break;
+	                }
+
+	                // Check bonus symbols if not already filled
+	                if (!placed) {
 	                    for (Map.Entry<String, Integer> entry : config.probabilities().bonusSymbols().symbols().entrySet()) {
 	                        cumulativeProbability += entry.getValue();
 	                        if (randomValue <= cumulativeProbability) {
@@ -49,7 +59,7 @@ public class MatrixBuilder {
 	                }
 	            }
 	        }
-
+	        
 	        return matrix;
 	    }
 }
